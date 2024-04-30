@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="author" translatable="false">Нетология. Университет интернет-профессий</string>
+    <string name="published" translatable="false">21 мая 18:36</string>
+    <string name="views" translatable="false">26.5K</string>
+    <string name="shares" translatable="false">423</string>
+    <string name="likes" translatable="false">23.3K</string>
+    <dimen name="common_spacing">16dp</dimen>
+    <dimen name="icon_size">24dp</dimen>
+    <dimen name="indentation">10dp</dimen>
+    <dimen name="post_avatar_size">48dp</dimen>
+    <string name="text" translatable="false">Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия
+- помочь встать на путь роста и начать цепочку
+перемен - http://netolo.gy/fyb</string>
+</resources>
