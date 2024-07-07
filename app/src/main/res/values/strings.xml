@@ -1,4 +1,8 @@
 <resources>
     <string name="app_name">NMedia</string>
     <string name="nmedia">NMedia!</string>
+    <string name="Сообщение" translatable="false">Сообщение</string>
+    <string name="Редактирование" translatable="false">Редактирование</string>
+
+
 </resources>
