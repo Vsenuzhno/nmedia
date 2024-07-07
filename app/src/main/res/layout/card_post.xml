@@ -101,7 +101,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@id/barrierText" />
 
-    <ImageButton
+    <com.google.android.material.button.MaterialButton
         android:id="@+id/ivShares"
         android:layout_width="@dimen/icon_size"
         android:layout_height="@dimen/icon_size"
@@ -111,7 +111,8 @@
         android:importantForAccessibility="no"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/barrierText"
-        app:srcCompat="@drawable/baseline_share_24"
+        app:icon="@drawable/baseline_share_24"
+        style="@style/Widget.AppTheme.Share"
         tools:ignore="TouchTargetSizeCheck" />
 
     <com.google.android.material.checkbox.MaterialCheckBox
