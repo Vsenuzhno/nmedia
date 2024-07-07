@@ -80,7 +80,7 @@ class PostsAdapter(
                 content.text = post.content
                 likes.text = formatCount(post.likes)
                 share.text = formatCount(post.shares)
-                ivLikes.setImageResource(if (post.likedByMe) R.drawable.baseline_favorite_red_24 else R.drawable.baseline_favorite_border_24)
+                ivLikes.isChecked = post.likedByMe
                 ivLikes.setOnClickListener {
                     onInteractionListener.onLikeListener(post)
                 }
