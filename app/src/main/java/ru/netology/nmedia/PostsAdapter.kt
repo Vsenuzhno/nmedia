@@ -78,9 +78,9 @@ class PostsAdapter(
                 author.text = post.author
                 published.text = post.published
                 content.text = post.content
-                likes.text = formatCount(post.likes)
-                share.text = formatCount(post.shares)
+                ivShares.text = formatCount(post.shares)
                 ivLikes.isChecked = post.likedByMe
+                ivLikes.text= formatCount(post.likes)
                 ivLikes.setOnClickListener {
                     onInteractionListener.onLikeListener(post)
                 }
