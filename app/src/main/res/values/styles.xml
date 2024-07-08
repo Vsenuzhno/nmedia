@@ -11,17 +11,19 @@
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
 
-    <style name="Widget.AppTheme.LikeCheckBox" parent="Widget.Material3.CompoundButton.CheckBox">
-        <item name="buttonTint">@color/like_checkbox_tint</item>
-        <item name="android:paddingStart">@dimen/icon_button_padding</item>
+    <style name="Widget.AppTheme.LikeCheckBox" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+        <item name="iconTint">@color/like_checkbox_tint</item>
+        <item name="android:minWidth">@dimen/icon_button_min_size</item>
+        <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
 
-    <style name="Widget.AppTheme.Share" parent="Widget.Material3.Button.IconButton">
-        <item name="buttonTint">@color/like_checkbox_tint</item>
-        <item name="android:paddingStart">@dimen/icon_button_padding</item>
+    <style name="Widget.AppTheme.Share" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+        <item name="buttonTint">@color/material_dynamic_neutral99</item>
+        <item name="android:minWidth">@dimen/icon_button_min_size</item>
+        <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
 
-    <style name="Widget.AppTheme.LikeButton" parent="Widget.MaterialComponents.Button.TextButton.Icon">
+    <style name="Widget.AppTheme.MoreVert" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
         <item name="iconTint">@color/like_checkbox_tint</item>
         <item name="android:minWidth">@dimen/icon_button_min_size</item>
         <item name="android:minHeight">@dimen/icon_button_min_size</item>

@@ -6,7 +6,8 @@
     <string name="shares" translatable="false">0</string>
     <string name="likes" translatable="false">0</string>
     <dimen name="common_spacing">16dp</dimen>
-    <dimen name="icon_size">24dp</dimen>
+    <dimen name="icon_size">48dp</dimen>
+    <dimen name="view_size">28dp</dimen>
     <dimen name="indentation">10dp</dimen>
     <dimen name="post_avatar_size">48dp</dimen>
     <dimen name="fab_margin">16dp</dimen>
