@@ -3,6 +3,7 @@
     <string name="nmedia">NMedia!</string>
     <string name="Сообщение" translatable="false">Сообщение</string>
     <string name="Редактирование" translatable="false">Редактирование</string>
+    <string name="save_edit" translatable="false">Сохранить изменения?</string>
     <string name="error_empty_content" translatable="false">Контент не может быть пустым</string>
     <string name="description_post_save" translatable="false">Сохранить</string>
     <string name="add_post" translatable="false">Добавить пост</string>

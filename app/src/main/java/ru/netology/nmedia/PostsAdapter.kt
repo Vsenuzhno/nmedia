@@ -80,7 +80,7 @@ class PostsAdapter(
                 content.text = post.content
                 ivShares.text = formatCount(post.shares)
                 ivLikes.isChecked = post.likedByMe
-                ivLikes.text= formatCount(post.likes)
+                ivLikes.text = formatCount(post.likes)
                 ivLikes.setOnClickListener {
                     onInteractionListener.onLikeListener(post)
                 }

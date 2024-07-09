@@ -57,7 +57,7 @@ dependencies {
     implementation("androidx.fragment:fragment-ktx:1.8.1")
     implementation("androidx.activity:activity-ktx:1.9.0")
 
-    implementation (libs.androidx.activity.ktx)
+    implementation(libs.androidx.activity.ktx)
     // ViewModel
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycle_version")
     // ViewModel utilities for Compose

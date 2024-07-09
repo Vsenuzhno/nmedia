@@ -7,6 +7,7 @@ import android.text.TextWatcher
 import android.view.View
 import android.widget.Toast
 import androidx.activity.result.launch
+import androidx.activity.result.registerForActivityResult
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.ActivityMainBinding
@@ -19,8 +20,12 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel: PostViewModel by viewModels()
         val adapter = PostsAdapter(object : OnInteractionListener {
+            val editPostLauncher = registerForActivityResult(EditPostResultContract()) { editedPost ->
+                editedPost ?: return@registerForActivityResult
+                viewModel.edit(editedPost) // Передайте измененный пост в viewModel
+            }
             override fun onEdit(post: Post) {
-                viewModel.edit(post)
+                editPostLauncher.launch(post)
             }
 
             override fun onLikeListener(post: Post) {
@@ -49,45 +54,45 @@ class MainActivity : AppCompatActivity() {
             adapter.submitList(posts)
         }
 
-      //  viewModel.edited.observe(this) { post ->
-      //      if (post.id == 0L) {
-      //          binding.cancelButton.visibility = View.GONE
-      //          binding.previewText.visibility = View.GONE
-      //          binding.edit.visibility = View.GONE
-      //          binding.editorText.visibility = View.GONE
-      //          binding.content.setText("")
-      //          binding.content.clearFocus()
-      //          return@observe
-      //      }
-      //      binding.cancelButton.visibility = View.VISIBLE
-      //      binding.previewText.visibility = View.VISIBLE
-      //      binding.edit.visibility = View.VISIBLE
-      //      binding.editorText.visibility = View.VISIBLE
-      //      with(binding.content) {
-      //          requestFocus()
-      //          setText(post.content)
-      //      }
-      //  }
+        //  viewModel.edited.observe(this) { post ->
+        //      if (post.id == 0L) {
+        //          binding.cancelButton.visibility = View.GONE
+        //          binding.previewText.visibility = View.GONE
+        //          binding.edit.visibility = View.GONE
+        //          binding.editorText.visibility = View.GONE
+        //          binding.content.setText("")
+        //          binding.content.clearFocus()
+        //          return@observe
+        //      }
+        //      binding.cancelButton.visibility = View.VISIBLE
+        //      binding.previewText.visibility = View.VISIBLE
+        //      binding.edit.visibility = View.VISIBLE
+        //      binding.editorText.visibility = View.VISIBLE
+        //      with(binding.content) {
+        //          requestFocus()
+        //          setText(post.content)
+        //      }
+        //  }
 
-      //  binding.save.setOnClickListener {
-      //      with(binding.content) {
-      //          if (text.isNullOrBlank()) {
-      //              Toast.makeText(
-      //                  this@MainActivity,
-      //                  "Поле не может быть пустым",
-      //                  Toast.LENGTH_SHORT
-      //              ).show()
-      //              return@setOnClickListener
-      //          }
+        //  binding.save.setOnClickListener {
+        //      with(binding.content) {
+        //          if (text.isNullOrBlank()) {
+        //              Toast.makeText(
+        //                  this@MainActivity,
+        //                  "Поле не может быть пустым",
+        //                  Toast.LENGTH_SHORT
+        //              ).show()
+        //              return@setOnClickListener
+        //          }
 
-       //         viewModel.changeContent(text.toString())
-       //         viewModel.save()
+        //         viewModel.changeContent(text.toString())
+        //         viewModel.save()
 //
-       //         setText("")
-       //         clearFocus()
-       //         AndroidUtil.hideKeyboard(this)
-       //     }
-       // }
+        //         setText("")
+        //         clearFocus()
+        //         AndroidUtil.hideKeyboard(this)
+        //     }
+        // }
 
         //binding.cancelButton.setOnClickListener {
         //    viewModel.cancelEditing()
@@ -113,6 +118,9 @@ class MainActivity : AppCompatActivity() {
         //    }
         //})
 
+
+
+
         val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
             result ?: return@registerForActivityResult
             viewModel.changeContent(result)
@@ -122,6 +130,5 @@ class MainActivity : AppCompatActivity() {
         binding.fab.setOnClickListener {
             newPostLauncher.launch()
         }
-
     }
 }
