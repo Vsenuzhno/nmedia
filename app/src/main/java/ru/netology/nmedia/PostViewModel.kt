@@ -18,15 +18,22 @@ private val empty = Post(
 
 class PostViewModel : ViewModel() {
     private val repository: PostRepository = PostRepositoryInMemoryImpl()
-    val data = repository.getAll()
+    private val _data = MutableLiveData<List<Post>>()
+    val data: LiveData<List<Post>>
+        get() = _data
     val edited = MutableLiveData(empty)
     private val _isEditing = MutableLiveData(false)
     val isEditing: LiveData<Boolean>
         get() = _isEditing
 
+    init {
+        _data.value = repository.getAll().value
+    }
+
     fun save() {
         edited.value?.let {
             repository.save(it)
+            _data.value = repository.getAll().value // Обновляем данные
         }
         edited.value = empty
         _isEditing.value = false
@@ -47,12 +54,23 @@ class PostViewModel : ViewModel() {
         }
     }
 
-    fun likeById(id: Long) = repository.likeById(id)
-    fun shareById(id: Long) = repository.shareById(id)
-    fun removeById(id: Long) = repository.removeById(id)
+    fun likeById(id: Long) {
+        repository.likeById(id)
+        _data.value = repository.getAll().value // Обновляем данные
+    }
+
+    fun shareById(id: Long) {
+        repository.shareById(id)
+        _data.value = repository.getAll().value // Обновляем данные
+    }
+
+    fun removeById(id: Long) {
+        repository.removeById(id)
+        _data.value = repository.getAll().value // Обновляем данные
+    }
+
     fun cancelEditing() {
         _isEditing.value = false
         edited.value = empty
     }
 }
-

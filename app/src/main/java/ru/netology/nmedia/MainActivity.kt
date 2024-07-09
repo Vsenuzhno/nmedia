@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         val adapter = PostsAdapter(object : OnInteractionListener {
             val editPostLauncher = registerForActivityResult(EditPostResultContract()) { editedPost ->
                 editedPost ?: return@registerForActivityResult
-                viewModel.edit(editedPost) // Передайте измененный пост в viewModel
+                viewModel.edit(editedPost)
             }
             override fun onEdit(post: Post) {
                 editPostLauncher.launch(post)
