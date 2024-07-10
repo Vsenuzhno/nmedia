@@ -9,12 +9,20 @@ class PostRepositoryInMemoryImpl : PostRepository {
         Post(
             id = nextId++,
             author = "Нетология. Университет интернет-профессий",
-            content = "Привет, это новая Нетология! Когда-то Нетология начиналась с интенсивов по онлайн-маркетингу. Затем появились курсы по дизайну, разработке, аналитике и управлению. Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия\n" +
-                    "- помочь встать на путь роста и начать цепочку\n" +
-                    "перемен - http://netolo.gy/fyb",
+            content = "",
             published = "21 мая 18:36",
             likedByMe = false,
-            sharedByMe = false
+            sharedByMe = false,
+            video = null
+        ),
+        Post(
+            id = nextId++,
+            author = "Нетология. Университет интернет-профессий",
+            content = "https://www.youtube.com/watch?v=WhWc3b3KhnY",
+            published = "21 мая 18:36",
+            likedByMe = false,
+            sharedByMe = false,
+            video = null
         ),
         Post(
             id = nextId++,
@@ -24,7 +32,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
                     "перемен - http://netolo.gy/fyb",
             published = "22 мая 18:36",
             likedByMe = false,
-            sharedByMe = false
+            sharedByMe = false,
+            video = null
         ),
         Post(
             id = nextId++,
@@ -34,7 +43,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
                     "перемен - http://netolo.gy/fyb",
             published = "23 мая 18:36",
             likedByMe = false,
-            sharedByMe = false
+            sharedByMe = false,
+            video = null
         ),
         Post(
             id = nextId++,
@@ -44,17 +54,8 @@ class PostRepositoryInMemoryImpl : PostRepository {
                     "перемен - http://netolo.gy/fyb",
             published = "22 мая 18:36",
             likedByMe = false,
-            sharedByMe = false
-        ),
-        Post(
-            id = nextId++,
-            author = "Нетология.",
-            content = "Мы растём сами и помогаем расти студентам: от новичков до уверенных профессионалов Но самое важное остаётся с нами: мы верим, что в каждом уже есть сила, которая заставляет хотеть больше, целиться выше, бежать быстрее. Наша миссия\n" +
-                    "- помочь встать на путь роста и начать цепочку\n" +
-                    "перемен - http://netolo.gy/fyb",
-            published = "22 мая 23:36",
-            likedByMe = false,
-            sharedByMe = false
+            sharedByMe = false,
+            video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         ),
     ).reversed()
 
@@ -68,15 +69,18 @@ class PostRepositoryInMemoryImpl : PostRepository {
                     id = nextId++,
                     author = "Me",
                     likedByMe = false,
-                    published = "now"
+                    published = "now",
+                    video = null
                 )
             ) + posts
-            data.value = posts
-            return
-        }
-
-        posts = posts.map {
-            if (it.id != post.id) it else it.copy(content = post.content)
+        } else {
+            posts = posts.map {
+                if (it.id == post.id) {
+                    it.copy(content = post.content)
+                } else {
+                    it
+                }
+            }
         }
         data.value = posts
     }

@@ -15,6 +15,41 @@
         android:padding="@dimen/common_spacing"
         tools:context=".MainActivity">
 
+        <com.google.android.material.card.MaterialCardView
+            style="@style/Widget.AppTheme.Play"
+            android:id="@+id/videoContainer"
+            android:layout_width="0dp"
+            app:cardElevation="2dp"
+            android:focusableInTouchMode="true"
+            android:layout_height="200dp"
+            android:background="?attr/selectableItemBackground"
+            android:onClick="@{() -> listener.onVideoClick(post.video)}"
+            android:visibility="visible"
+            app:layout_constraintBottom_toBottomOf="@id/barrierText"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/barrier">
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@mipmap/ic_banner_foreground" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                style="@style/Widget.AppTheme.Ok"
+                android:id="@+id/videoContainerPlay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="false"
+                android:contentDescription="play"
+                android:src="@drawable/play_circle_24" />
+
+        </com.google.android.material.card.MaterialCardView>
+
         <ImageView
             android:id="@+id/avatar"
             android:layout_width="@dimen/post_avatar_size"
@@ -119,6 +154,8 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
+            android:elevation="2dp"
+
             android:id="@+id/ivShares"
             style="@style/Widget.AppTheme.Share"
             android:layout_width="wrap_content"
@@ -132,6 +169,7 @@
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
+            android:elevation="2dp"
             android:id="@+id/ivLikes"
             android:text="@string/likes"
             style="@style/Widget.AppTheme.LikeCheckBox"
@@ -144,7 +182,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/barrierText"
             app:layout_editor_absoluteY="288dp" />
-
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

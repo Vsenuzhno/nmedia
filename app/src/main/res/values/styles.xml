@@ -35,7 +35,13 @@
     </style>
 
     <style name="Widget.AppTheme.Ok" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
-        <item name="buttonTint">@color/material_dynamic_neutral99</item>
+        <item name="iconTint">@color/material_dynamic_neutral99</item>
+        <item name="android:minWidth">@dimen/icon_button_min_size</item>
+        <item name="android:minHeight">@dimen/icon_button_min_size</item>
+    </style>
+
+    <style name="Widget.AppTheme.Play" parent="Widget.Material3.CardView.Elevated">
+        <item name="background">@color/purple_200</item>
         <item name="android:minWidth">@dimen/icon_button_min_size</item>
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
