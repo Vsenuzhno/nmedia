@@ -1,6 +1,7 @@
 package ru.netology.nmedia
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import android.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
@@ -9,19 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 import ru.netology.nmedia.databinding.CardPostBinding
 
 interface OnInteractionListener {
-    fun onLikeListener(post: Post) {}
-    fun onShareListener(post: Post) {}
-    fun onEdit(post: Post) {}
-    fun onRemove(post: Post) {}
+    fun onLikeListener(post: Post)
+    fun onShareListener(post: Post)
+    fun onEdit(post: Post)
+    fun onRemove(post: Post)
+    fun onVideoClick(videoUrl: String?)
 }
-
 
 class PostsAdapter(
     private val onInteractionListener: OnInteractionListener,
 ) : ListAdapter<Post, PostsAdapter.PostViewHolder>(PostDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        val binding = CardPostBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {val binding = CardPostBinding.inflate(
+        LayoutInflater.from(parent.context), parent, false)
         return PostViewHolder(binding, onInteractionListener)
     }
 
@@ -29,7 +30,6 @@ class PostsAdapter(
         val post = getItem(position)
         holder.bind(post)
     }
-
 
     class PostDiffCallback : DiffUtil.ItemCallback<Post>() {
         override fun areItemsTheSame(oldItem: Post, newItem: Post): Boolean {
@@ -39,37 +39,34 @@ class PostsAdapter(
         override fun areContentsTheSame(oldItem: Post, newItem: Post): Boolean {
             return oldItem == newItem
         }
-
     }
 
     class PostViewHolder(
         private val binding: CardPostBinding,
         private val onInteractionListener: OnInteractionListener
-
     ) : RecyclerView.ViewHolder(binding.root) {
 
         private fun formatCount(count: Int): String {
-            if (count < 0) {
-                return "0"
-            }
-            if (count < 1000) {
-                return count.toString()
-            }
-            val thousands = count / 1000
-            val remainder = count % 1000
-            if (thousands < 100) {
-                return if (remainder > 0) {
-                    String.format("%d.%dK", thousands, remainder / 100)
-                } else {
-                    String.format("%dK", thousands)
+            return when {
+                count < 0 -> "0"
+                count < 1000 -> count.toString()
+                count < 1_000_000 -> {val thousands = count / 1000
+                    val remainder = count % 1000
+                    if (remainder > 0) {
+                        String.format("%d.%dK", thousands, remainder / 100)
+                    } else {
+                        String.format("%dK", thousands)
+                    }
                 }
-            }
-            val millions = thousands / 100
-            val remainder2 = thousands % 100
-            return if (remainder2 > 0) {
-                String.format("%d.%dM", millions, remainder2)
-            } else {
-                String.format("%dM", millions)
+                else -> {
+                    val millions = count / 1_000_000
+                    val remainder = count % 1_000_000
+                    if (remainder > 0) {
+                        String.format("%d.%dM", millions, remainder / 100_000)
+                    } else {
+                        String.format("%dM", millions)
+                    }
+                }
             }
         }
 
@@ -78,6 +75,16 @@ class PostsAdapter(
                 author.text = post.author
                 published.text = post.published
                 content.text = post.content
+
+                if (!post.video.isNullOrBlank()) {
+                    videoContainer.visibility = View.VISIBLE
+                    videoContainer.setOnClickListener {
+                        onInteractionListener.onVideoClick(post.video)
+                    }
+                } else {
+                    videoContainer.visibility = View.GONE
+                }
+
                 ivShares.text = formatCount(post.shares)
                 ivLikes.isChecked = post.likedByMe
                 ivLikes.text = formatCount(post.likes)
@@ -98,19 +105,16 @@ class PostsAdapter(
                                     onInteractionListener.onRemove(post)
                                     true
                                 }
-
                                 R.id.edit -> {
                                     onInteractionListener.onEdit(post)
                                     true
                                 }
-
                                 else -> false
                             }
                         }
                     }.show()
                 }
             }
-
         }
     }
 }

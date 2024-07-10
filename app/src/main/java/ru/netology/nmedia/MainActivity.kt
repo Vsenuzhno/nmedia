@@ -1,13 +1,9 @@
 package ru.netology.nmedia
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import android.view.View
-import android.widget.Toast
 import androidx.activity.result.launch
-import androidx.activity.result.registerForActivityResult
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import ru.netology.nmedia.databinding.ActivityMainBinding
@@ -20,10 +16,12 @@ class MainActivity : AppCompatActivity() {
 
         val viewModel: PostViewModel by viewModels()
         val adapter = PostsAdapter(object : OnInteractionListener {
-            val editPostLauncher = registerForActivityResult(EditPostResultContract()) { editedPost ->
-                editedPost ?: return@registerForActivityResult
-                viewModel.edit(editedPost)
-            }
+            val editPostLauncher =
+                registerForActivityResult(EditPostResultContract()) { editedPost ->
+                    editedPost ?: return@registerForActivityResult
+                    viewModel.save(editedPost)
+                }
+
             override fun onEdit(post: Post) {
                 editPostLauncher.launch(post)
             }
@@ -46,6 +44,12 @@ class MainActivity : AppCompatActivity() {
                 val shareIntent =
                     Intent.createChooser(intent, getString(R.string.chooser_share_post))
                 startActivity(shareIntent)
+            }
+
+            override fun onVideoClick(videoUrl: String?) {
+                videoUrl ?: return
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl))
+                startActivity(intent)
             }
         })
 
@@ -119,12 +123,16 @@ class MainActivity : AppCompatActivity() {
         //})
 
 
-
-
         val newPostLauncher = registerForActivityResult(NewPostResultContract()) { result ->
             result ?: return@registerForActivityResult
             viewModel.changeContent(result)
-            viewModel.save()
+            val newPost = Post(
+                id = 0L,
+                author = "Me",
+                content = viewModel.edited.value?.content ?: "",
+                published = "now",
+            )
+            viewModel.save(newPost)
         }
 
         binding.fab.setOnClickListener {

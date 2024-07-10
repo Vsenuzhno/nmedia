@@ -14,6 +14,7 @@ private val empty = Post(
     likes = 0,
     shares = 0,
     published = ""
+
 )
 
 class PostViewModel : ViewModel() {
@@ -30,13 +31,9 @@ class PostViewModel : ViewModel() {
         _data.value = repository.getAll().value
     }
 
-    fun save() {
-        edited.value?.let {
-            repository.save(it)
-            _data.value = repository.getAll().value // Обновляем данные
-        }
-        edited.value = empty
-        _isEditing.value = false
+    fun save(post: Post) {
+        repository.save(post)
+        _data.value = repository.getAll().value
     }
 
     fun edit(post: Post) {
@@ -56,17 +53,17 @@ class PostViewModel : ViewModel() {
 
     fun likeById(id: Long) {
         repository.likeById(id)
-        _data.value = repository.getAll().value // Обновляем данные
+        _data.value = repository.getAll().value
     }
 
     fun shareById(id: Long) {
         repository.shareById(id)
-        _data.value = repository.getAll().value // Обновляем данные
+        _data.value = repository.getAll().value
     }
 
     fun removeById(id: Long) {
         repository.removeById(id)
-        _data.value = repository.getAll().value // Обновляем данные
+        _data.value = repository.getAll().value
     }
 
     fun cancelEditing() {

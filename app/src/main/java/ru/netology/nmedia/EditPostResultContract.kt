@@ -16,7 +16,6 @@ class EditPostResultContract : ActivityResultContract<Post, Post?>() {
         if (resultCode != Activity.RESULT_OK) return null
         val content = intent?.getStringExtra(Intent.EXTRA_TEXT) ?: return null
         val postId = intent.getLongExtra("postId", 0L)
-        return Post(postId, content, ""
-            ,"31",4,3, likedByMe = false, sharedByMe = false)
+        return Post(postId, "Me", content, "now")
     }
 }
