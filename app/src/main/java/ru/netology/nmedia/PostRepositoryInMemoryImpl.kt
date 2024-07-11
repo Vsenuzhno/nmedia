@@ -57,7 +57,7 @@ class PostRepositoryInMemoryImpl : PostRepository {
             sharedByMe = false,
             video = "https://www.youtube.com/watch?v=WhWc3b3KhnY"
         ),
-    ).reversed()
+        ).reversed()
 
     private val data = MutableLiveData(posts)
     override fun getAll(): LiveData<List<Post>> = data
