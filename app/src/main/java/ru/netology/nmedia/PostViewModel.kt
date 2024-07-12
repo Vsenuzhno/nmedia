@@ -28,8 +28,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         get() = _data
     val edited = MutableLiveData(empty)
     private val _isEditing = MutableLiveData(false)
-    val isEditing: LiveData<Boolean>
-        get() = _isEditing
+   //val isEditing: LiveData<Boolean>
+   //    get() = _isEditing
 
     init {
         _data.value = repository.getAll().value
@@ -74,4 +74,5 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         _isEditing.value = false
         edited.value = empty
     }
+
 }

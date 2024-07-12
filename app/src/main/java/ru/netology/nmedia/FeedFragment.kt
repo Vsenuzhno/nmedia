@@ -6,7 +6,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import ru.netology.nmedia.databinding.FragmentFeedBinding
@@ -25,7 +28,9 @@ class FeedFragment : Fragment() {
         )
 
 
-        val viewModel: PostViewModel by viewModels(ownerProducer = ::requireParentFragment)
+
+
+        val viewModel: PostViewModel by activityViewModels()
         val adapter = PostsAdapter(object : OnInteractionListener {
             val editPostLauncher =
                 registerForActivityResult(EditPostResultContract()) { editedPost ->
@@ -69,72 +74,23 @@ class FeedFragment : Fragment() {
             adapter.submitList(posts)
         }
 
-        //  viewModel.edited.observe(this) { post ->
-        //      if (post.id == 0L) {
-        //          binding.cancelButton.visibility = View.GONE
-        //          binding.previewText.visibility = View.GONE
-        //          binding.edit.visibility = View.GONE
-        //          binding.editorText.visibility = View.GONE
-        //          binding.content.setText("")
-        //          binding.content.clearFocus()
-        //          return@observe
-        //      }
-        //      binding.cancelButton.visibility = View.VISIBLE
-        //      binding.previewText.visibility = View.VISIBLE
-        //      binding.edit.visibility = View.VISIBLE
-        //      binding.editorText.visibility = View.VISIBLE
-        //      with(binding.content) {
-        //          requestFocus()
-        //          setText(post.content)
-        //      }
-        //  }
-
-        //  binding.save.setOnClickListener {
-        //      with(binding.content) {
-        //          if (text.isNullOrBlank()) {
-        //              Toast.makeText(
-        //                  this@MainActivity,
-        //                  "Поле не может быть пустым",
-        //                  Toast.LENGTH_SHORT
-        //              ).show()
-        //              return@setOnClickListener
-        //          }
-
-        //         viewModel.changeContent(text.toString())
-        //         viewModel.save()
-//
-        //         setText("")
-        //         clearFocus()
-        //         AndroidUtil.hideKeyboard(this)
-        //     }
-        // }
-
-        //binding.cancelButton.setOnClickListener {
-        //    viewModel.cancelEditing()
-        //    with(binding.content) {
-        //        setText("")
-        //        clearFocus()
-        //        AndroidUtil.hideKeyboard(this)
-        //    }
-        //}
-
-        //binding.content.addTextChangedListener(object : TextWatcher {
-        //    override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-        //        // Не используется
-        //    }
-//
-        //    override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-        //        // Не используется
-        //    }
-//
-        //    override fun afterTextChanged(s: Editable?) {
-        //        val firstLine = s?.toString()?.lines()?.firstOrNull() ?: ""
-        //        binding.previewText.text = firstLine
-        //    }
-        //})
 
         binding.fab.setOnClickListener {
-            findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
+            val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_animation)
+            animation.setAnimationListener(object : Animation.AnimationListener {
+                override fun onAnimationStart(animation: Animation?) {
+                    // Nothing to do
+                }
+
+                override fun onAnimationEnd(animation: Animation?) {
+                    findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
+                }
+
+                override fun onAnimationRepeat(animation: Animation?) {
+                    // Nothing to do
+                }
+            })
+            binding.fab.startAnimation(animation)
         }
         return binding.root
     }
