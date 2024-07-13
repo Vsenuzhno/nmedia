@@ -3,32 +3,31 @@ package ru.netology.nmedia
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.Animation
-import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
-import ru.netology.nmedia.databinding.FragmentFeedBinding
+import ru.netology.nmedia.databinding.FragmentNewPostBinding
+import ru.netology.nmedia.databinding.FragmentOnePostBinding
 
-class FeedFragment : Fragment() {
+class OnePostFragment : Fragment() {
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
+        inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentFeedBinding.inflate(
+        val viewModel: PostViewModel by activityViewModels()
+        val binding = FragmentOnePostBinding.inflate(
             inflater,
             container,
             false
         )
 
-
-        val viewModel: PostViewModel by activityViewModels()
-        val adapter = PostsAdapter(object : OnInteractionListener {
+        binding.lifecycleOwner = viewLifecycleOwner
+        val viewHolder = PostsAdapter.PostViewHolder(binding.onePost, object : OnInteractionListener {
             val editPostLauncher =
                 registerForActivityResult(EditPostResultContract()) { editedPost ->
                     editedPost ?: return@registerForActivityResult
@@ -45,6 +44,9 @@ class FeedFragment : Fragment() {
 
             override fun onRemove(post: Post) {
                 viewModel.removeById(post.id)
+                findNavController().navigateUp()
+                viewModel.cancelEditing()
+
             }
 
             override fun onShareListener(post: Post) {
@@ -70,36 +72,20 @@ class FeedFragment : Fragment() {
                     putLong("postId", post.id)
                 }
                 findNavController().navigate(R.id.action_feedFragment_to_onePostFragment, bundle)
+
             }
+
         })
 
-
-
-
-        binding.fab.setOnClickListener {
-            val animation = AnimationUtils.loadAnimation(requireContext(), R.anim.fab_animation)
-            animation.setAnimationListener(object : Animation.AnimationListener {
-                override fun onAnimationStart(animation: Animation?) {
-                }
-
-                override fun onAnimationEnd(animation: Animation?) {
-                    findNavController().navigate(R.id.action_feedFragment_to_newPostFragment)
-                    binding.fab.visibility = View.GONE
-                }
-
-                override fun onAnimationRepeat(animation: Animation?) {}
-            })
-            binding.fab.startAnimation(animation)
+        val postId = arguments?.getLong("postId") ?: run {
+            Log.e("OnePostFragment", "Post ID is null")
+            return binding.root
         }
 
-        binding.list.adapter = adapter
         viewModel.data.observe(viewLifecycleOwner) { posts ->
-            adapter.submitList(posts)
+            val post = posts.find { it.id == postId } ?: return@observe
+            viewHolder.bind(post)
         }
-
-
-
-
 
         return binding.root
     }

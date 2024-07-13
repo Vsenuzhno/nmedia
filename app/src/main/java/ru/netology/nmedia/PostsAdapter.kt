@@ -15,13 +15,15 @@ interface OnInteractionListener {
     fun onEdit(post: Post)
     fun onRemove(post: Post)
     fun onVideoClick(videoUrl: String?)
+    fun onOpenPost(post: Post)
 }
 
 class PostsAdapter(
     private val onInteractionListener: OnInteractionListener,
 ) : ListAdapter<Post, PostsAdapter.PostViewHolder>(PostDiffCallback()) {
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {val binding = CardPostBinding.inflate(
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
+        val binding = CardPostBinding.inflate(
         LayoutInflater.from(parent.context), parent, false)
         return PostViewHolder(binding, onInteractionListener)
     }
@@ -95,6 +97,10 @@ class PostsAdapter(
                 ivShares.setOnClickListener {
                     onInteractionListener.onShareListener(post)
                 }
+                root.setOnClickListener {
+                    onInteractionListener.onOpenPost(post)
+                }
+
 
                 menu.setOnClickListener {
                     PopupMenu(it.context, it).apply {

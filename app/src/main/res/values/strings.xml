@@ -8,6 +8,7 @@
     <string name="description_post_save" translatable="false">Сохранить</string>
     <string name="add_post" translatable="false">Добавить пост</string>
     <string name="chooser_share_post" translatable="false">Поделиться</string>
+    <string name="play" translatable="false">Воспроизвести</string>
 
 
 </resources>

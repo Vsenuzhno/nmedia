@@ -12,7 +12,6 @@ import ru.netology.nmedia.databinding.FragmentNewPostBinding
 class NewPostFragment : Fragment() {
 
 
-
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -21,9 +20,10 @@ class NewPostFragment : Fragment() {
         val binding = FragmentNewPostBinding.inflate(
             inflater,
             container,
-            false)
+            false
+        )
 
-        arguments?.textArg?.let ( binding.edit::setText)
+        arguments?.textArg?.let(binding.edit::setText)
         val viewModel: PostViewModel by activityViewModels()
 
         binding.edit.requestFocus()
@@ -38,6 +38,7 @@ class NewPostFragment : Fragment() {
         }
         return binding.root
     }
+
     companion object {
         var Bundle.textArg: String? by StringArg
     }

@@ -1,13 +1,10 @@
 package ru.netology.nmedia
 
 import PostRepositoryFileImpl
-import PostRepositoryInMemoryImpl
-import PostRepositorySharedPrefsImpl
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 
 private val empty = Post(
     id = 0,
@@ -28,8 +25,8 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
         get() = _data
     val edited = MutableLiveData(empty)
     private val _isEditing = MutableLiveData(false)
-   //val isEditing: LiveData<Boolean>
-   //    get() = _isEditing
+    //val isEditing: LiveData<Boolean>
+    //    get() = _isEditing
 
     init {
         _data.value = repository.getAll().value
