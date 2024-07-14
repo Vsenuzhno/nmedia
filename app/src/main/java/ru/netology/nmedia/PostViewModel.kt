@@ -25,6 +25,7 @@ class PostViewModel(application: Application) : AndroidViewModel(application) {
     val data =repository.getAll()
     val edited = MutableLiveData(empty)
     private val _isEditing = MutableLiveData(false)
+    var draftContent: String? = null
 
 
     fun save(post: Post) {

@@ -4,6 +4,8 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
+import androidx.activity.addCallback
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
@@ -13,20 +15,26 @@ import ru.netology.nmedia.databinding.FragmentNewPostBinding
 
 class NewPostFragment : Fragment() {
 
+    private lateinit var binding: FragmentNewPostBinding
+    private val viewModel: PostViewModel by activityViewModels()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        requireActivity().onBackPressedDispatcher.addCallback(this, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                viewModel.draftContent = binding.edit.text.toString()
+                findNavController().navigateUp()
+            }
+        })
+    }
 
     override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
+        inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View {
-        val binding = FragmentNewPostBinding.inflate(
-            inflater,
-            container,
-            false
-        )
+        binding = FragmentNewPostBinding.inflate(inflater, container, false)
 
-        arguments?.textArg?.let(binding.edit::setText)
-        val viewModel: PostViewModel by activityViewModels()
+        binding.edit.setText(viewModel.draftContent ?: arguments?.textArg)
 
         binding.edit.requestFocus()
         binding.ok.setOnClickListener {
@@ -35,17 +43,12 @@ class NewPostFragment : Fragment() {
                 viewModel.edited.value?.let { post ->
                     viewModel.save(post)
                 }
+                viewModel.draftContent = null
                 findNavController().navigateUp()
             } else {
                 Snackbar.make(
-                    binding.root,
-                    R.string.error_empty_content, // Replace with your string resource
-                    BaseTransientBottomBar.LENGTH_INDEFINITE
-                )
-                    .setAction(android.R.string.ok) {
-                    }
-                    .show()
-
+                    binding.root, R.string.error_empty_content, BaseTransientBottomBar.LENGTH_INDEFINITE
+                ).setAction(android.R.string.ok) {}.show()
             }
         }
         return binding.root
