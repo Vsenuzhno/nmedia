@@ -62,6 +62,7 @@ class FeedFragment : Fragment() {
                 startActivity(intent)
             }
 
+
             override fun onOpenPost(post: Post) {
                 val bundle = Bundle().apply {
                     putLong("postId", post.id)
