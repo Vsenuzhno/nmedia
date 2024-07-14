@@ -121,6 +121,7 @@
             android:layout_marginTop="@dimen/common_spacing"
             android:layout_marginBottom="@dimen/common_spacing"
             android:autoLink="web"
+            android:fontFamily="sans-serif"
             android:text="@string/text"
             app:layout_constraintBottom_toBottomOf="@id/barrierText"
             app:layout_constraintEnd_toEndOf="parent"

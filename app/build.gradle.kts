@@ -57,7 +57,7 @@ dependencies {
     val gson_version = "2.11.0"
 
 
-    implementation ("com.google.code.gson:gson:$gson_version")
+    implementation("com.google.code.gson:gson:$gson_version")
     implementation("androidx.fragment:fragment:1.8.1")
     implementation("androidx.fragment:fragment-ktx:1.8.1")
     implementation("androidx.activity:activity-ktx:1.9.0")
