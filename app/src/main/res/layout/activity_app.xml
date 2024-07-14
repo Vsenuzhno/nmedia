@@ -10,4 +10,4 @@
     app:navGraph="@navigation/nav_main"
     tools:context=".AppActivity">
 
-    </fragment>
+</fragment>

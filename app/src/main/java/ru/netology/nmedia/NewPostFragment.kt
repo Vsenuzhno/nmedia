@@ -7,6 +7,8 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import ru.netology.nmedia.databinding.FragmentNewPostBinding
 
 class NewPostFragment : Fragment() {
@@ -34,6 +36,17 @@ class NewPostFragment : Fragment() {
                     viewModel.save(post)
                 }
                 findNavController().navigateUp()
+            }else{
+                Snackbar.make(
+                    binding.root,
+                    R.string.error_empty_content, // Replace with your string resource
+                    BaseTransientBottomBar.LENGTH_INDEFINITE
+                )
+                    .setAction(android.R.string.ok) {
+                        // Optional: Handle the Snackbar action (e.g., dismiss the fragment)
+                    }
+                    .show()
+
             }
         }
         return binding.root

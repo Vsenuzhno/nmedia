@@ -9,28 +9,57 @@
         android:id="@+id/feedFragment"
         android:name="ru.netology.nmedia.FeedFragment"
         android:label="fragment_feed"
-        tools:layout="@layout/fragment_feed" >
+        tools:layout="@layout/fragment_feed">
         <action
             android:id="@+id/action_feedFragment_to_newPostFragment"
             app:destination="@id/newPostFragment"
-            app:enterAnim="@anim/slide_in_right"
-            app:exitAnim="@anim/slide_out_left" />
+            app:enterAnim="@anim/slide_new_post"
+            app:popEnterAnim="@anim/slide_pop_exit" />
         <action
             android:id="@+id/action_feedFragment_to_onePostFragment"
-            app:destination="@id/onePostFragment" />
+            app:destination="@id/onePostFragment"
+            app:popEnterAnim="@anim/slide_pop_exit"
+            app:exitAnim="@anim/slide_out" />
+        <action
+            android:id="@+id/action_feedFragment_to_editPostFragment2"
+            app:destination="@id/editPostFragment2"
+            app:enterAnim="@anim/slide_edit_post"
+            app:popEnterAnim="@anim/slide_pop_exit" />
     </fragment>
     <fragment
         android:id="@+id/newPostFragment"
         android:name="ru.netology.nmedia.NewPostFragment"
         android:label="fragment_new_post"
-        tools:layout="@layout/fragment_new_post" />
+        tools:layout="@layout/fragment_new_post">
+        <action
+            android:id="@+id/action_newPostFragment_to_feedFragment"
+            app:destination="@id/feedFragment" />
+    </fragment>
     <fragment
         android:id="@+id/onePostFragment"
         android:name="ru.netology.nmedia.OnePostFragment"
         android:label="OnePostFragment"
-        tools:layout="@layout/fragment_one_post" >
+        tools:layout="@layout/fragment_one_post">
         <action
             android:id="@+id/action_feedFragment_to_newPostFragment"
             app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_onePostFragment_to_editPostFragment2"
+            app:destination="@id/editPostFragment2"
+            app:enterAnim="@anim/slide_edit_post"
+            app:popEnterAnim="@anim/slide_edit_post" />
     </fragment>
+    <fragment
+        android:id="@+id/editPostFragment2"
+        android:name="ru.netology.nmedia.EditPostFragment"
+        android:label="EditPostFragment"
+        tools:layout="@layout/fragment_edit_post">
+        <action
+            android:id="@+id/action_editPostFragment2_to_feedFragment"
+            app:destination="@id/feedFragment" />
+        <action
+            android:id="@+id/action_editPostFragment2_to_onePostFragment"
+            app:destination="@id/onePostFragment" />
+    </fragment>
+
 </navigation>

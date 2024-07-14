@@ -24,7 +24,8 @@ class PostsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val binding = CardPostBinding.inflate(
-        LayoutInflater.from(parent.context), parent, false)
+            LayoutInflater.from(parent.context), parent, false
+        )
         return PostViewHolder(binding, onInteractionListener)
     }
 
@@ -52,7 +53,8 @@ class PostsAdapter(
             return when {
                 count < 0 -> "0"
                 count < 1000 -> count.toString()
-                count < 1_000_000 -> {val thousands = count / 1000
+                count < 1_000_000 -> {
+                    val thousands = count / 1000
                     val remainder = count % 1000
                     if (remainder > 0) {
                         String.format("%d.%dK", thousands, remainder / 100)
@@ -60,6 +62,7 @@ class PostsAdapter(
                         String.format("%dK", thousands)
                     }
                 }
+
                 else -> {
                     val millions = count / 1_000_000
                     val remainder = count % 1_000_000
@@ -100,6 +103,9 @@ class PostsAdapter(
                 root.setOnClickListener {
                     onInteractionListener.onOpenPost(post)
                 }
+                content.setOnClickListener {
+                    onInteractionListener.onOpenPost(post)
+                }
 
 
                 menu.setOnClickListener {
@@ -111,10 +117,12 @@ class PostsAdapter(
                                     onInteractionListener.onRemove(post)
                                     true
                                 }
+
                                 R.id.edit -> {
                                     onInteractionListener.onEdit(post)
                                     true
                                 }
+
                                 else -> false
                             }
                         }

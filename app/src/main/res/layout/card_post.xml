@@ -1,35 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<com.google.android.material.card.MaterialCardView
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     style="@style/Widget.AppTheme.PostCard"
-    android:padding="10dp"
+    app:cardElevation="4dp"
+    app:cardCornerRadius="@dimen/fab_margin"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="8dp"
+    android:padding="10dp"
+    app:cardUseCompatPadding="false">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/main"
+        style="@style/Widget.AppTheme.PostCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/common_spacing"
-        tools:context=".FeedFragment">
+        tools:context=".MainActivity">
 
         <com.google.android.material.card.MaterialCardView
-            style="@style/Widget.AppTheme.Play"
             android:id="@+id/videoContainer"
+            style="@style/Widget.AppTheme.Play"
             android:layout_width="0dp"
-            app:cardElevation="2dp"
-            android:focusableInTouchMode="true"
             android:layout_height="200dp"
             android:background="?attr/selectableItemBackground"
+            android:focusableInTouchMode="true"
             android:onClick="@{() -> listener.onVideoClick(post.video)}"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@id/barrierText"
+            app:cardUseCompatPadding="true"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/barrier">
+            app:layout_constraintTop_toBottomOf="@id/barrierText">
 
             <com.google.android.material.imageview.ShapeableImageView
                 android:layout_width="match_parent"
@@ -38,12 +41,11 @@
                 android:src="@mipmap/ic_banner_foreground" />
 
             <com.google.android.material.imageview.ShapeableImageView
-                style="@style/Widget.AppTheme.Ok"
                 android:id="@+id/videoContainerPlay"
+                style="@style/Widget.AppTheme.Ok"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:background="?attr/selectableItemBackground"
                 android:clickable="false"
                 android:contentDescription="play"
                 android:src="@drawable/play_circle_24" />
@@ -126,61 +128,50 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/barrier" />
 
-        <TextView
-            android:id="@+id/views"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="8dp"
-            android:text="@string/views"
-            app:layout_constraintBottom_toBottomOf="@+id/ivViews"
-            app:layout_constraintStart_toEndOf="@+id/ivViews"
-            app:layout_constraintTop_toTopOf="@+id/ivViews"
-            app:layout_constraintVertical_bias="0.482" />
-
         <com.google.android.material.button.MaterialButton
             android:id="@+id/ivViews"
-            style="@style/Widget.AppTheme.Share"
-            android:layout_width="@dimen/icon_size"
-            android:layout_height="@dimen/icon_size"
-            android:layout_marginStart="296dp"
-            android:layout_marginTop="@dimen/common_spacing"
-            android:background="@android:color/transparent"
-            android:importantForAccessibility="no"
-            app:icon="@drawable/view"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/barrierText"
-            app:layout_constraintVertical_bias="0.0"
-            tools:ignore="TouchTargetSizeCheck" />
-
-        <com.google.android.material.button.MaterialButton
-            android:elevation="2dp"
-
-            android:id="@+id/ivShares"
             style="@style/Widget.AppTheme.Share"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/icon_size"
             android:layout_marginTop="@dimen/common_spacing"
+            android:background="@android:color/transparent"
+            android:importantForAccessibility="no"
+            android:text="@string/views"
+            app:icon="@drawable/view"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/videoContainer"
+            app:layout_constraintVertical_bias="0.0"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/ivShares"
+
+            style="@style/Widget.AppTheme.Share"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/icon_size"
+            android:layout_marginTop="@dimen/common_spacing"
+            android:elevation="2dp"
             android:importantForAccessibility="no"
             android:text="@string/shares"
             app:icon="@drawable/share"
             app:layout_constraintStart_toEndOf="@+id/ivLikes"
-            app:layout_constraintTop_toBottomOf="@id/barrierText"
+            app:layout_constraintTop_toBottomOf="@id/videoContainer"
             tools:ignore="TouchTargetSizeCheck" />
 
         <com.google.android.material.button.MaterialButton
-            android:elevation="2dp"
             android:id="@+id/ivLikes"
-            android:text="@string/likes"
             style="@style/Widget.AppTheme.LikeCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/common_spacing"
             android:checkable="true"
+            android:elevation="2dp"
             android:importantForAccessibility="no"
+            android:text="@string/likes"
             app:icon="@drawable/like"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/barrierText"
+            app:layout_constraintTop_toBottomOf="@id/videoContainer"
             app:layout_editor_absoluteY="288dp" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

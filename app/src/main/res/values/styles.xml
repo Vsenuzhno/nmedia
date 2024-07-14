@@ -18,6 +18,11 @@
     </style>
 
     <style name="Widget.AppTheme.Share" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
+        <item name="android:minWidth">@dimen/icon_button_min_size</item>
+        <item name="android:minHeight">@dimen/icon_button_min_size</item>
+    </style>
+
+    <style name="Widget.AppTheme.Cancel" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
         <item name="buttonTint">@color/material_dynamic_neutral99</item>
         <item name="android:minWidth">@dimen/icon_button_min_size</item>
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
@@ -29,7 +34,7 @@
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
 
-    <style name="Widget.AppTheme.PostCard" parent="Widget.Material3.CardView.Outlined">
+    <style name="Widget.AppTheme.PostCard" parent="Widget.Material3.CardView.Elevated">
         <item name="android:minWidth">@dimen/icon_button_min_size</item>
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
@@ -47,7 +52,6 @@
     </style>
 
     <style name="Widget.AppTheme.MoreVert" parent="Widget.Material3.Button.IconButton.Filled.Tonal">
-        <item name="iconTint">@color/like_checkbox_tint</item>
         <item name="android:minWidth">@dimen/icon_button_min_size</item>
         <item name="android:minHeight">@dimen/icon_button_min_size</item>
     </style>
