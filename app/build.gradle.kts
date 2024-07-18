@@ -1,6 +1,8 @@
 plugins {
     alias(libs.plugins.androidApplication)
     alias(libs.plugins.jetbrainsKotlinAndroid)
+    id("kotlin-kapt")
+    id("kotlin-android")
 }
 
 android {
@@ -53,9 +55,12 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    val lifecycle_version = "2.8.1"
+    val lifecycle_version = "2.8.3"
     val arch_version = "2.2.0"
     val gson_version = "2.11.0"
+    val room_version = "2.6.1"
+
+    kapt("androidx.room:room-compiler:$room_version")
 
 
     implementation("com.google.code.gson:gson:$gson_version")
@@ -64,7 +69,9 @@ dependencies {
     implementation("androidx.activity:activity-ktx:1.9.0")
     implementation("androidx.navigation:navigation-ui-ktx:2.7.7")
     implementation("androidx.navigation:navigation-fragment-ktx:2.7.7")
-
+    implementation("androidx.navigation:navigation-fragment:2.7.7")
+    implementation("androidx.room:room-common:2.6.1")
+    implementation("androidx.room:room-runtime:2.6.1")
 
     implementation(libs.androidx.activity.ktx)
     // ViewModel

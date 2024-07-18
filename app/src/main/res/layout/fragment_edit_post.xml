@@ -14,7 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/common_spacing"
-        tools:context=".EditPostFragment">
+        tools:context=".activity.EditPostFragment">
 
         <com.google.android.material.textview.MaterialTextView
             style="@style/Widget.AppTheme.Text"

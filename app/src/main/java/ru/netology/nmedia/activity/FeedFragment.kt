@@ -1,4 +1,4 @@
-package ru.netology.nmedia
+package ru.netology.nmedia.activity
 
 import android.content.Intent
 import android.net.Uri
@@ -11,7 +11,12 @@ import android.view.animation.AnimationUtils
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.navigation.fragment.findNavController
+import ru.netology.nmedia.PostViewModel
+import ru.netology.nmedia.R
+import ru.netology.nmedia.adapter.OnInteractionListener
+import ru.netology.nmedia.adapter.PostsAdapter
 import ru.netology.nmedia.databinding.FragmentFeedBinding
+import ru.netology.nmedia.dto.Post
 
 class FeedFragment : Fragment() {
 
@@ -54,6 +59,9 @@ class FeedFragment : Fragment() {
                 val shareIntent =
                     Intent.createChooser(intent, getString(R.string.chooser_share_post))
                 startActivity(shareIntent)
+
+                viewModel.shareById(post.id)
+
             }
 
             override fun onVideoClick(videoUrl: String?) {
